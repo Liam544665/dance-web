@@ -1,0 +1,64 @@
+<h1>Site Settings</h1>
+<form action="/settings" method="POST" class="settings-form">
+  <div class="setting-group">
+    <label for="theme">Theme:</label>
+    <select name="theme" id="theme">
+      <option value="light" {{#settings.isLight}}selected{{/settings.isLight}}>Light</option>
+      <option value="dark" {{#settings.isDark}}selected{{/settings.isDark}}>Dark</option>
+    </select>
+  </div>
+
+  <div class="setting-group">
+    <label for="fontSize">Font Size:</label>
+    <select name="fontSize" id="fontSize">
+      <option value="normal" {{#settings.isNormalFont}}selected{{/settings.isNormalFont}}>Normal</option>
+      <option value="large" {{#settings.isLargeFont}}selected{{/settings.isLargeFont}}>Large</option>
+    </select>
+  </div>
+
+  <div class="setting-group">
+    <label>
+      <input type="checkbox" name="contrast" {{#settings.contrast}}checked{{/settings.contrast}}>
+      High Contrast Mode
+    </label>
+  </div>
+
+  <button type="submit" class="btn">Save Settings</button>
+</form>
+
+<form action="/settings/reset" method="POST">
+  <button type="submit" class="btn reset">Reset to Defaults</button>
+</form>
+
+<style>
+  .settings-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .setting-group {
+    margin-bottom: 1.5rem;
+  }
+  .setting-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  .btn {
+    background-color: #5e60ce;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .btn.reset {
+    background-color: #aaa;
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+  }
+</style>

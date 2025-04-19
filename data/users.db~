@@ -1,0 +1,2 @@
+{"name":"Admin User","email":"admin@dancevibe.com","password":"$2b$10$CNds857crxT80Yzmm2urUeFpl.s6TaDPVSPj00Djj3zCAlEdtnfxC","isAdmin":true,"role":"admin","settings":{"theme":"light","fontSize":"normal","contrast":false},"_id":"1lA0zwdXYRMFiZsv"}
+{"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}

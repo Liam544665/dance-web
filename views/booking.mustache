@@ -1,0 +1,11 @@
+const express = require('express');
+const router = express.Router();
+const bookingsController = require('../controllers/bookingsController');
+
+// Booking form page for a specific course
+router.get('/new/:courseId', bookingsController.showBookingForm);
+
+// Create a booking
+router.post('/create/:courseId', bookingsController.createBooking);
+
+module.exports = router;

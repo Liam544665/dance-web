@@ -1,0 +1,40 @@
+<h1>Class List for {{ course.title }}</h1>
+<p><strong>Date:</strong> {{ course.date }}<br>
+<strong>Location:</strong> {{ course.location }}</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#bookings}}
+    <tr>
+      <td>{{ name }}</td>
+      <td>{{ email }}</td>
+    </tr>
+    {{/bookings}}
+    {{^bookings}}
+    <tr><td colspan="2">No bookings found for this course.</td></tr>
+    {{/bookings}}
+  </tbody>
+</table>
+
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+  }
+  th {
+    background-color: #5e60ce;
+    color: white;
+  }
+</style>
