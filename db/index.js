@@ -1,21 +1,22 @@
-const fs = require('fs');
 const Datastore = require('nedb');
+const fs = require('fs');
+const path = require('path');
 
-const cleanup = (file) => {
-  const temp = `${file}~`;
-  if (fs.existsSync(temp)) {
-    console.warn(`Cleaning up ${temp}`);
-    fs.unlinkSync(temp);
-  }
+const ensureDir = (filePath) => {
+  const dir = path.dirname(filePath);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 };
 
-const loadDB = (filename) => {
-  cleanup(filename);
-  return new Datastore({ filename, autoload: true, timestampData: true });
+const createDB = (filename) => {
+  ensureDir(filename);
+  const db = new Datastore({ filename, autoload: true });
+  const tempFile = filename + '~';
+  if (fs.existsSync(tempFile)) fs.unlinkSync(tempFile);
+  return db;
 };
 
 module.exports = {
-  usersDB: loadDB('./data/users.db'),
-  coursesDB: loadDB('./data/courses.db'),
-  bookingsDB: loadDB('./data/bookings.db'),
+  usersDB: createDB('./data/users.db'),
+  coursesDB: createDB('./data/courses.db'),
+  bookingsDB: createDB('./data/bookings.db')
 };

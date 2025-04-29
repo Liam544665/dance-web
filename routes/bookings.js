@@ -1,33 +1,17 @@
-const { usersDB, coursesDB, bookingsDB } = require('../db');
-const fs = require('fs');
-const Datastore = require('nedb');
-
-const cleanupCorrupt = (path) => {
-  const tempPath = `${path}~`;
-  if (fs.existsSync(tempPath)) {
-    console.warn(`⚠️ Cleaning up leftover NeDB temp file: ${tempPath}`);
-    fs.unlinkSync(tempPath);
-  }
-};
-
-cleanupCorrupt('./data/courses.db');
-cleanupCorrupt('./data/bookings.db');
-cleanupCorrupt('./data/users.db');
-
 const express = require('express');
 const router = express.Router();
-const bookingsController = require('../controllers/bookingsController');
-const renderWithLayout = require('../middleware/renderWithLayout');
 
-router.get('/new/:courseId', (req, res) => {
-  bookingsController.showBookingForm(req, {
-    render: (viewData) => {
-      renderWithLayout('booking', { ...viewData, title: 'Book a Course' }, req, res);
-    },
-    status: (code) => res.status(code)
+router.get('/', (req, res) => {
+  if (!req.session.user) return res.redirect('/auth/login');
+
+  res.render('layout', {
+    title: 'My Bookings',
+    user: req.session.user,
+    body: `
+      <h2>My Bookings</h2>
+      <p>This is where your dance class bookings will appear.</p>
+    `
   });
 });
-
-router.post('/create/:courseId', bookingsController.createBooking);
 
 module.exports = router;

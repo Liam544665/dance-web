@@ -15,7 +15,7 @@
       <td>{{ email }}</td>
       <td>{{ role }}</td>
       <td>
-        {{#isNotSelf}}
+
         <form action="/admin/users/{{_id}}/promote" method="POST" style="display:inline;">
           <button type="submit" class="btn">Promote</button>
         </form>
@@ -25,7 +25,7 @@
         <form action="/admin/users/{{_id}}/delete" method="POST" style="display:inline;">
           <button type="submit" class="btn btn-delete">Delete</button>
         </form>
-        {{/isNotSelf}}
+
       </td>
     </tr>
     {{/users}}

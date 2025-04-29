@@ -15,7 +15,6 @@ cleanupCorrupt('./data/users.db');
 const renderWithLayout = require('../middleware/renderWithLayout');
 const express = require('express');
 const router = express.Router();
-const User = require('../models/users');
 
 router.get('/', (req, res) => {
   if (!req.session.user) return res.redirect('/auth/login');
@@ -36,14 +35,15 @@ router.post('/', (req, res) => {
   if (!req.session.user) return res.redirect('/auth/login');
 
   const newSettings = {
-    theme: req.body.theme || 'light',
-    fontSize: req.body.fontSize || 'normal',
-    contrast: req.body.contrast === 'on'
+    theme: req.body.theme,
+    fontSize: req.body.fontSize,
+    contrast: !!req.body.contrast
   };
 
   req.session.settings = newSettings;
+  req.session.user.settings = newSettings;
 
-  User.update({ _id: req.session.user._id }, { $set: { settings: newSettings } }, {}, (err) => {
+  usersDB.update({ _id: req.session.user._id }, { $set: { settings: newSettings } }, {}, (err) => {
     if (err) console.error('Failed to update user settings in DB:', err);
     res.redirect('/settings');
   });
@@ -54,8 +54,9 @@ router.post('/reset', (req, res) => {
 
   const defaultSettings = { theme: 'light', fontSize: 'normal', contrast: false };
   req.session.settings = defaultSettings;
+  req.session.user.settings = defaultSettings;
 
-  User.update({ _id: req.session.user._id }, { $set: { settings: defaultSettings } }, {}, (err) => {
+  usersDB.update({ _id: req.session.user._id }, { $set: { settings: defaultSettings } }, {}, (err) => {
     if (err) console.error('Failed to reset settings in DB:', err);
     res.redirect('/settings');
   });

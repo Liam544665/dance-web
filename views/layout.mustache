@@ -2,148 +2,53 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{{ title }} | DanceVibe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
   <link rel="stylesheet" href="/css/style.css">
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      font-size: {{#settings.isLargeFont}}1.2rem{{/settings.isLargeFont}}{{^settings.isLargeFont}}1rem{{/settings.isLargeFont}};
-      background-color: {{#settings.isDark}}#1a1a1a{{/settings.isDark}}{{^settings.isDark}}white{{/settings.isDark}};
-      color: {{#settings.isDark}}#f0f0f0{{/settings.isDark}}{{^settings.isDark}}#000{{/settings.isDark}};
-    }
-    .high-contrast body {
-      background-color: black !important;
-      color: yellow !important;
-    }
-    main {
-      flex: 1;
-    }
-    footer {
-      background-color: #333;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-    }
-    header nav {
-      background-color: #5e60ce;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    header nav a {
-      color: white;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .nav-logo img {
-      height: 40px;
-    }
-    .nav-links a {
-      color: white;
-      margin: 0 0.75rem;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .user-nav {
-      position: relative;
-      display: inline-block;
-    }
-    .user-button {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0;
-    }
-    .avatar {
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      right: 0;
-      background-color: white;
-      min-width: 160px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 0.5rem;
-      overflow: hidden;
-      z-index: 1;
-    }
-    .dropdown-content a {
-      display: block;
-      padding: 0.75rem 1rem;
-      text-decoration: none;
-      color: #333;
-      transition: background-color 0.2s;
-    }
-    .dropdown-content a:hover {
-      background-color: #f1f1f1;
-    }
-  </style>
 </head>
-<body class="{{#settings.contrast}}high-contrast{{/settings.contrast}}">
-  <div class="page-wrapper">
-    <header>
-      <nav class="navbar">
-        <div class="nav-logo">
-          <a href="/"><img src="/images/brandkit/dancevibe-high-resolution-logo.png" alt="DanceVibe Logo"></a>
-        </div>
-        <div class="nav-right" style="display: flex; align-items: center; gap: 1rem;">
-          <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/courses">Courses</a>
-            {{^user}}
-              <a href="/auth/login">Login</a>
-              <a href="/auth/register">Register</a>
-            {{/user}}
-          </div>
+<body>
+  <!-- Header with logo and nav -->
+  <header class="navbar">
+    <div class="container">
+      <div class="logo">
+        <a href="/">
+          <img src="/images/brandkit/dancevibe-high-resolution-logo.png" alt="DanceVibe Logo">
+        </a>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/courses">Courses</a></li>
           {{#user}}
-          <div class="user-nav">
-            <button class="user-button" onclick="toggleDropdown()">
-              <img src="/images/avatar-default.svg" alt="Profile" class="avatar" />
-            </button>
-            <div id="userDropdown" class="dropdown-content">
-              <a href="/profile">Your Profile</a>
-              <a href="/settings">Settings</a>
-              <a href="/auth/logout">Sign out</a>
-            </div>
-          </div>
+            <li><a href="/bookings">My Bookings</a></li>
+            <li><a href="/profile">Profile</a></li>
+            {{#user.isAdmin}}
+              <li><a href="/admin">Admin</a></li>
+            {{/user.isAdmin}}
+            <li><a href="/auth/logout">Logout</a></li>
           {{/user}}
-        </div>
+          {{^user}}
+            <li><a href="/auth/login">Login</a></li>
+            <li><a href="/auth/register">Register</a></li>
+          {{/user}}
+        </ul>
       </nav>
-    </header>
-    <main>
-      <br>
-      {{{ body }}}
-      <br>
-    </main>
-    <footer>
-      <p>&copy; 2025 DanceVibe. All rights reserved.</p>
-    </footer>
-  </div>
-  <script>
-    function toggleDropdown() {
-      const dropdown = document.getElementById("userDropdown");
-      dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-    }
-    window.addEventListener("click", function (e) {
-      const dropdown = document.getElementById("userDropdown");
-      const button = document.querySelector(".user-button");
-      if (!button.contains(e.target)) {
-        dropdown.style.display = "none";
-      }
-    });
-  </script>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main class="container">
+    {{{body}}}
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 DanceVibe</p>
+    </div>
+  </footer>
 </body>
 </html>
+
+
+

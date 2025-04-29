@@ -11,14 +11,15 @@
   <div class="setting-group">
     <label for="fontSize">Font Size:</label>
     <select name="fontSize" id="fontSize">
-      <option value="normal" {{#settings.isNormalFont}}selected{{/settings.isNormalFont}}>Normal</option>
-      <option value="large" {{#settings.isLargeFont}}selected{{/settings.isLargeFont}}>Large</option>
+      <option value="small" {{#settings.isSmall}}selected{{/settings.isSmall}}>Small</option>
+      <option value="medium" {{#settings.isMedium}}selected{{/settings.isMedium}}>Medium</option>
+      <option value="large" {{#settings.isLarge}}selected{{/settings.isLarge}}>Large</option>
     </select>
   </div>
 
   <div class="setting-group">
     <label>
-      <input type="checkbox" name="contrast" {{#settings.contrast}}checked{{/settings.contrast}}>
+      <input type="checkbox" name="contrast" {{#settings.isHighContrast}}checked{{/settings.isHighContrast}}>
       High Contrast Mode
     </label>
   </div>

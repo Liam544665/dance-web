@@ -1,34 +1,33 @@
-const { usersDB, coursesDB, bookingsDB } = require('../db');
-const fs = require('fs');
-const Datastore = require('nedb');
-
-const cleanupCorrupt = (path) => {
-  const tempPath = `${path}~`;
-  if (fs.existsSync(tempPath)) {
-    console.warn(`⚠️ Cleaning up leftover NeDB temp file: ${tempPath}`);
-    fs.unlinkSync(tempPath);
-  }
-};
-
-cleanupCorrupt('./data/users.db');
-
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/authController');
-const renderWithLayout = require('../middleware/renderWithLayout');
 
 router.get('/login', (req, res) => {
-  renderWithLayout('login', { title: 'Login' }, req, res);
+  res.render('layout', {
+    title: 'Login',
+    body: `
+      <h2>Login</h2>
+      <form action="/auth/login" method="POST">
+        <input type="email" name="email" placeholder="Email" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+      </form>
+    `
+  });
 });
-
-router.post('/login', authController.login);
 
 router.get('/register', (req, res) => {
-  renderWithLayout('register', { title: 'Register' }, req, res);
+  res.render('layout', {
+    title: 'Register',
+    body: `
+      <h2>Register</h2>
+      <form action="/auth/register" method="POST">
+        <input type="text" name="name" placeholder="Name" required><br>
+        <input type="email" name="email" placeholder="Email" required><br>
+        <input type="password" name="password" placeholder="Password" required><br>
+        <button type="submit">Register</button>
+      </form>
+    `
+  });
 });
-
-router.post('/register', authController.register);
-
-router.get('/logout', authController.logout);
 
 module.exports = router;

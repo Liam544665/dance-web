@@ -1,62 +1,16 @@
-<h1>Manage Users</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#users}}
-    <tr>
-      <td>{{ name }}</td>
-      <td>{{ email }}</td>
-      <td>{{ role }}</td>
-      <td>
-        {{#isNotSelf}}
-        <form action="/admin/users/{{_id}}/promote" method="POST" style="display:inline;">
-          <button type="submit" class="btn">Promote</button>
-        </form>
-        <form action="/admin/users/{{_id}}/demote" method="POST" style="display:inline;">
-          <button type="submit" class="btn">Demote</button>
-        </form>
-        <form action="/admin/users/{{_id}}/delete" method="POST" style="display:inline;">
-          <button type="submit" class="btn btn-delete">Delete</button>
-        </form>
-        {{/isNotSelf}}
-      </td>
-    </tr>
-    {{/users}}
-  </tbody>
-</table>
+<h1>Admin Dashboard</h1>
 
-<style>
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1.5rem;
-  }
-  th, td {
-    border: 1px solid #ddd;
-    padding: 0.75rem;
-    text-align: left;
-  }
-  th {
-    background-color: #5e60ce;
-    color: white;
-  }
-  .btn {
-    background-color: #5e60ce;
-    color: white;
-    border: none;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 0.2rem;
-  }
-  .btn-delete {
-    background-color: crimson;
-  }
-</style>
+<h2>Users</h2>
+{{#users}}
+  <p>{{name}} - {{email}} - Role: {{role}}</p>
+{{/users}}
+
+<h2>Courses</h2>
+{{#courses}}
+  <p>{{name}} by {{instructor}}</p>
+{{/courses}}
+
+<h2>Bookings</h2>
+{{#bookings}}
+  <p>{{name}} booked {{courseId}}</p>
+{{/bookings}}

@@ -1,11 +1,13 @@
-const express = require('express');
-const router = express.Router();
-const bookingsController = require('../controllers/bookingsController');
-
-// Booking form page for a specific course
-router.get('/new/:courseId', bookingsController.showBookingForm);
-
-// Create a booking
-router.post('/create/:courseId', bookingsController.createBooking);
-
-module.exports = router;
+<h1>My Bookings</h1>
+{{#bookings}}
+  <div style="border:1px solid #ccc; padding:1em; margin-bottom:1em;">
+    <p><strong>Course ID:</strong> {{courseId}}</p>
+    <p><strong>Booked for:</strong> {{name}} ({{email}})</p>
+    <form method="POST" action="/bookings/delete/{{_id}}">
+      <button type="submit">Cancel</button>
+    </form>
+  </div>
+{{/bookings}}
+{{^bookings}}
+  <p>You have no bookings.</p>
+{{/bookings}}

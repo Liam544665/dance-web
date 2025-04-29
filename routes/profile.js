@@ -1,64 +1,26 @@
-const { usersDB, coursesDB, bookingsDB } = require('../db');
-const fs = require('fs');
-const Datastore = require('nedb');
-
-const cleanupCorrupt = (path) => {
-  const tempPath = `${path}~`;
-  if (fs.existsSync(tempPath)) {
-    console.warn(`⚠️ Cleaning up leftover NeDB temp file: ${tempPath}`);
-    fs.unlinkSync(tempPath);
-  }
-};
-
-cleanupCorrupt('./data/users.db');
-
 // routes/profile.js
 const express = require('express');
 const router = express.Router();
+const { usersDB } = require('../models/db');
 const renderWithLayout = require('../middleware/renderWithLayout');
-
-const bcrypt = require('bcrypt');
-
 
 router.get('/', (req, res) => {
   if (!req.session.user) return res.redirect('/auth/login');
-
-  const { name, email } = req.session.user;
   renderWithLayout('profile', {
     title: 'Your Profile',
-    name,
-    email
+    user: req.session.user
   }, req, res);
 });
 
-router.post('/', async (req, res) => {
+router.post('/update', (req, res) => {
   if (!req.session.user) return res.redirect('/auth/login');
+  const { name, email } = req.body;
 
-  const { name, email, password } = req.body;
-  const userId = req.session.user._id;
-
-  const updateFields = { name, email };
-
-  if (password && password.trim() !== '') {
-    try {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      updateFields.password = hashedPassword;
-    } catch (err) {
-      console.error('Password hashing error:', err);
-      return res.status(500).send('Server error');
+  usersDB.update({ _id: req.session.user._id }, { $set: { name, email } }, {}, (err) => {
+    if (!err) {
+      req.session.user.name = name;
+      req.session.user.email = email;
     }
-  }
-
-  usersDB.update({ _id: userId }, { $set: updateFields }, {}, (err, numReplaced) => {
-    if (err) {
-      console.error('Failed to update user:', err);
-      return res.status(500).send('Database error');
-    }
-
-    // Update session
-    req.session.user.name = name;
-    req.session.user.email = email;
-
     res.redirect('/profile');
   });
 });
