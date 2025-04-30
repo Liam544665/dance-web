@@ -30,6 +30,7 @@ app.use('/', require('./routes/index'));
 app.use('/auth', require('./routes/auth'));
 app.use('/courses', require('./routes/courses'));
 app.use('/bookings', require('./routes/bookings'));
+app.use('/profile', require('./routes/profile'));
 app.use('/admin', require('./routes/admin'));
 
 // 404 Page
