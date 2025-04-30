@@ -39,10 +39,6 @@ app.use((req, res) => {
 
 // Server
 const PORT = process.env.PORT || 3000;
-// Auto-run seed script on startup
-const { spawn } = require('child_process');
-spawn('node', ['seed.js'], { stdio: 'inherit' });
-
 app.listen(PORT, () => {
   console.log(`🎉 Server running on http://localhost:${PORT}`);
 });
