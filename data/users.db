@@ -1,1 +1,6 @@
-{"name":"Admin","email":"admin@dancevibe.com","password":"$2b$10$B4aFlP/Ub16v3eQYgJIWnecobKg01I1LlSISI58EFCq/JWlsS/yAa","role":"admin","settings":{"theme":"light","fontSize":"normal","contrast":false},"_id":"ftx5n2zuN8nP7tN0"}
+{"name":"Liam Moore","email":"Liam544665@gmail.com","password":"$2b$10$raCAUZvu6gQJ1FOiqO8UFu.XDZr5mvojGN1626j7h2RkhUEAIUw3C","isAdmin":true,"_id":"3JkfPMcfySwOBHT2","role":"admin","settings":{"theme":"dark","fontSize":"small","contrast":false}}
+{"name":"Admin","email":"admin@dancevibe.com","password":"$2b$10$ijpTJbfcI5pggEw.ETzBwe4VOOkgKcSFPeeXuF3TX/GXUpfowUzgC","role":"admin","settings":{"theme":"light","fontSize":"normal","contrast":false},"_id":"8TBP1E3jty2idYZs","isAdmin":true}
+{"$$indexCreated":{"fieldName":"email","unique":true,"sparse":false}}
+{"$$deleted":true,"_id":"3JkfPMcfySwOBHT2"}
+{"$$deleted":true,"_id":"8TBP1E3jty2idYZs"}
+{"name":"Admin","email":"admin@dancevibe.com","password":"$2b$10$Nio5JReOrPwrMq4j1/mwKejuGW8A6hFD5it4dXLF9XTCh9oR0LLe2","role":"admin","settings":{"theme":"light","fontSize":"normal","contrast":false},"_id":"QeZ24iDQj5nYYevm"}

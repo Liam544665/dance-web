@@ -1,8 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
-const Datastore = require('nedb');
-const usersDB = new Datastore({ filename: './data/users.db', autoload: true });
 
 router.get('/login', (req, res) => {
   res.render('layout', {
@@ -18,18 +15,6 @@ router.get('/login', (req, res) => {
   });
 });
 
-router.post('/login', (req, res) => {
-  const { email, password } = req.body;
-  usersDB.findOne({ email }, (err, user) => {
-    if (err || !user) return res.status(401).send('Invalid credentials');
-    if (!bcrypt.compareSync(password, user.password)) {
-      return res.status(401).send('Invalid credentials');
-    }
-    req.session.user = user;
-    res.redirect('/profile'); // You can change this to /courses or /
-  });
-});
-
 router.get('/register', (req, res) => {
   res.render('layout', {
     title: 'Register',
@@ -42,23 +27,6 @@ router.get('/register', (req, res) => {
         <button type="submit">Register</button>
       </form>
     `
-  });
-});
-
-router.post('/register', (req, res) => {
-  const { name, email, password } = req.body;
-  const hashedPassword = bcrypt.hashSync(password, 10);
-
-  usersDB.insert({ name, email, password: hashedPassword, isAdmin: false }, (err, newUser) => {
-    if (err) return res.status(500).send('Registration failed');
-    req.session.user = newUser;
-    res.redirect('/profile');
-  });
-});
-
-router.get('/logout', (req, res) => {
-  req.session.destroy(() => {
-    res.redirect('/');
   });
 });
 

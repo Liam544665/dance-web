@@ -1,2 +1,8 @@
-{"name":"Hip Hop Basics","instructor":"Jane","time":"Tuesdays 6PM","location":"Studio A","level":"Beginner","sessionCount":6,"_id":"LUKqIaPmPG5R4Uja"}
-{"name":"Salsa Weekend","instructor":"Carlos","time":"Sat & Sun","location":"Hall B","level":"All Levels","sessionCount":2,"_id":"5Q6rNol0XgmfBUOw"}
+{"name":"Salsa Weekend","instructor":"Carlos","time":"Sat & Sun","location":"Hall B","level":"All Levels","sessionCount":2,"_id":"HMA75HhCoL44CbDr"}
+{"name":"fgggg","level":"3","instructor":"jhon","time":"3pm","location":"hall6","sessionCount":3,"image":null,"_id":"L6jBAtTq1AF1aYio"}
+{"name":"Hip Hop Basics","instructor":"Jane","time":"Tuesdays 6PM","location":"Studio A","level":"Beginner","sessionCount":6,"_id":"stfgAjPmXj3eiaTK"}
+{"$$deleted":true,"_id":"HMA75HhCoL44CbDr"}
+{"$$deleted":true,"_id":"L6jBAtTq1AF1aYio"}
+{"$$deleted":true,"_id":"stfgAjPmXj3eiaTK"}
+{"name":"Hip Hop Basics","instructor":"Jane","time":"Tuesdays 6PM","location":"Studio A","level":"Beginner","sessionCount":6,"_id":"cyb5RD2mBAfT9WuW"}
+{"name":"Salsa Weekend","instructor":"Carlos","time":"Sat & Sun","location":"Hall B","level":"All Levels","sessionCount":2,"_id":"Hgs7nnzwUeSdSTpK"}
