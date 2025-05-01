@@ -39,29 +39,6 @@ A full-stack course booking system for a dance academy built using Node.js, Expr
 └── server.js           # App entry point
 ```
 
-graph TD
-
-    37599["User<br>External Actor"]
-    subgraph 37597["Database Container"]
-        37608["NeDB Datastore<br>NeDB"]
-    end
-    subgraph 37598["Dance Web Application Container"]
-        37600["Web Server<br>Node.js/Express"]
-        37601["Routing<br>Express Router"]
-        37602["Authentication<br>Node.js/bcrypt"]
-        37603["Controllers<br>Node.js"]
-        37604["Templating Engine<br>Mustache"]
-        37605["Data Models<br>Node.js/NeDB"]
-        37606["Configuration<br>JavaScript"]
-        37607["Database Seeding<br>Node.js/bcrypt"]
-        %% Edges at this level (grouped by source)
-        37601["Routing<br>Express Router"] -->|Uses Middleware| 37602["Authentication<br>Node.js/bcrypt"]
-    end
-    %% Edges at this level (grouped by source)
-    37599["User<br>External Actor"] -->|Interacts via HTTP| 37600["Web Server<br>Node.js/Express"]
-    37605["Data Models<br>Node.js/NeDB"] -->|Reads/Writes| 37608["NeDB Datastore<br>NeDB"]
-    37607["Database Seeding<br>Node.js/bcrypt"] -->|Writes Initial Data To| 37608["NeDB Datastore<br>NeDB"]
-
 
 ## 🧪 Testing
 
@@ -96,7 +73,7 @@ If deploying to Render or Glitch:
 Use the seeded admin account:
 ```
 Email: admin@dancevibe.com
-Password: admin123
+Password: QA
 ```
 
 ---
